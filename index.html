@@ -16,54 +16,124 @@
                     <path d="M2 17L12 22L22 17" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                     <path d="M2 12L12 17L22 12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                 </svg>
-                <h1>WP Plugin Packager</h1>
+                <h1>WP Dev Studio</h1>
             </div>
-            <button id="downloadBtn" class="primary-btn">
-                <span class="icon">↓</span> Download Plugin (.zip)
-            </button>
+            <div class="header-actions">
+                <button id="downloadBtn" class="primary-btn">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+                    Package (.zip)
+                </button>
+            </div>
         </header>
 
         <main>
             <aside class="sidebar">
-                <div class="panel">
-                    <h3>Configuration</h3>
-                    <div class="form-group">
-                        <label for="pluginName">Plugin Name</label>
-                        <input type="text" id="pluginName" placeholder="My Plugin">
+                <!-- Tab Navigation -->
+                <div class="sidebar-tabs">
+                    <button class="tab-btn active" data-tab="files">Files</button>
+                    <button class="tab-btn" data-tab="config">Config</button>
+                </div>
+
+                <!-- Files Tab -->
+                <div id="tab-files" class="tab-content active">
+                    <div class="panel file-panel">
+                        <div class="panel-header">
+                            <h3>Project Files</h3>
+                            <button id="addFileBtn" class="icon-btn" title="New File">+</button>
+                        </div>
+                        <div id="fileList" class="file-list">
+                            <!-- Populated by JS -->
+                        </div>
                     </div>
-                    <div class="form-group">
-                        <label for="pluginSlug">Text Domain (Slug)</label>
-                        <input type="text" id="pluginSlug" placeholder="my-plugin">
-                        <small>Determines folder name & zip filename</small>
-                    </div>
-                    <div class="form-group">
-                        <label for="pluginVersion">Version</label>
-                        <input type="text" id="pluginVersion" placeholder="1.0.0">
+
+                     <div class="panel snippets-panel">
+                        <h3>Generators</h3>
+                        <div class="snippet-grid">
+                            <button class="snippet-btn" data-snippet="cpt">
+                                <span class="emoji">📦</span> Post Type
+                            </button>
+                            <button class="snippet-btn" data-snippet="shortcode">
+                                <span class="emoji">⚡</span> Shortcode
+                            </button>
+                            <button class="snippet-btn" data-snippet="admin-menu">
+                                <span class="emoji">⚙️</span> Admin Page
+                            </button>
+                            <button class="snippet-btn" data-snippet="enqueue">
+                                <span class="emoji">🎨</span> Enqueue
+                            </button>
+                             <button class="snippet-btn" data-snippet="rest-api">
+                                <span class="emoji">🔌</span> REST API
+                            </button>
+                             <button class="snippet-btn" data-snippet="widget">
+                                <span class="emoji">🧩</span> Widget
+                            </button>
+                        </div>
                     </div>
                 </div>
 
-                <div class="panel">
-                    <h3>Build Options</h3>
-                    <div class="checkbox-group">
-                        <input type="checkbox" id="stubFiles" checked>
-                        <label for="stubFiles">
-                            <strong>Generate Dummy Dependencies</strong>
-                            <span>Creates empty files for 'require' paths found in code to prevent fatal errors on activation.</span>
-                        </label>
+                <!-- Config Tab -->
+                <div id="tab-config" class="tab-content">
+                    <div class="panel">
+                        <h3>Metadata</h3>
+                        <div class="form-group">
+                            <label for="pluginName">Plugin Name</label>
+                            <input type="text" id="pluginName" placeholder="My Plugin">
+                        </div>
+                        <div class="form-group">
+                            <label for="pluginSlug">Slug (Text Domain)</label>
+                            <input type="text" id="pluginSlug" placeholder="my-plugin">
+                        </div>
+                         <div class="form-group">
+                            <label for="pluginURI">Plugin URI</label>
+                            <input type="text" id="pluginURI" placeholder="https://example.com">
+                        </div>
+                        <div class="form-group">
+                            <label for="pluginAuthor">Author</label>
+                            <input type="text" id="pluginAuthor" placeholder="Your Name">
+                        </div>
+                         <div class="form-group">
+                            <label for="pluginDescription">Description</label>
+                            <textarea id="pluginDescription" rows="3" class="input-area" placeholder="What does this plugin do?"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="pluginVersion">Version</label>
+                            <input type="text" id="pluginVersion" placeholder="1.0.0">
+                        </div>
                     </div>
                 </div>
 
                 <div class="status-panel">
-                    <div id="statusMessage">Ready to package</div>
+                    <div id="statusMessage">Ready</div>
                 </div>
             </aside>
 
             <section class="editor-container">
                 <div class="editor-header">
-                    <span id="fileNameDisplay">plugin.php</span>
-                    <span class="badge">PHP</span>
+                    <div class="file-info">
+                        <span id="fileNameDisplay">plugin.php</span>
+                    </div>
+                    <div class="editor-controls">
+                        <button id="formatBtn" class="text-btn">Beautify</button>
+                    </div>
                 </div>
-                <textarea id="codeEditor" spellcheck="false"></textarea>
+                <div class="editor-wrapper">
+                    <textarea id="codeEditor" spellcheck="false"></textarea>
+                </div>
+                
+                <!-- Live Preview of WP Admin Row -->
+                <div class="wp-preview-bar">
+                    <div class="wp-preview-label">WP Admin Preview</div>
+                    <div class="wp-plugin-card">
+                        <div class="wp-plugin-header">
+                            <span class="wp-plugin-name" id="previewName">My Plugin</span>
+                            <span class="wp-plugin-version">Version <span id="previewVersion">1.0.0</span> | By <span id="previewAuthor">Author</span></span>
+                        </div>
+                        <div class="wp-plugin-desc" id="previewDesc">Description of the plugin goes here.</div>
+                        <div class="wp-plugin-actions">
+                            <a href="#">Deactivate</a> | <a href="#">Edit</a>
+                        </div>
+                    </div>
+                </div>
             </section>
         </main>
     </div>
