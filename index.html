@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Advanced WP Plugin Packager</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="app-container">
+        <header>
+            <div class="brand">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M12 2L2 7L12 12L22 7L12 2Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M2 17L12 22L22 17" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M2 12L12 17L22 12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+                <h1>WP Plugin Packager</h1>
+            </div>
+            <button id="downloadBtn" class="primary-btn">
+                <span class="icon">↓</span> Download Plugin (.zip)
+            </button>
+        </header>
+
+        <main>
+            <aside class="sidebar">
+                <div class="panel">
+                    <h3>Configuration</h3>
+                    <div class="form-group">
+                        <label for="pluginName">Plugin Name</label>
+                        <input type="text" id="pluginName" placeholder="My Plugin">
+                    </div>
+                    <div class="form-group">
+                        <label for="pluginSlug">Text Domain (Slug)</label>
+                        <input type="text" id="pluginSlug" placeholder="my-plugin">
+                        <small>Determines folder name & zip filename</small>
+                    </div>
+                    <div class="form-group">
+                        <label for="pluginVersion">Version</label>
+                        <input type="text" id="pluginVersion" placeholder="1.0.0">
+                    </div>
+                </div>
+
+                <div class="panel">
+                    <h3>Build Options</h3>
+                    <div class="checkbox-group">
+                        <input type="checkbox" id="stubFiles" checked>
+                        <label for="stubFiles">
+                            <strong>Generate Dummy Dependencies</strong>
+                            <span>Creates empty files for 'require' paths found in code to prevent fatal errors on activation.</span>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="status-panel">
+                    <div id="statusMessage">Ready to package</div>
+                </div>
+            </aside>
+
+            <section class="editor-container">
+                <div class="editor-header">
+                    <span id="fileNameDisplay">plugin.php</span>
+                    <span class="badge">PHP</span>
+                </div>
+                <textarea id="codeEditor" spellcheck="false"></textarea>
+            </section>
+        </main>
+    </div>
+    <script type="module" src="script.js"></script>
+<script defer src="https://static.cloudflareinsights.com/beacon.min.js/v8c78df7c7c0f484497ecbca7046644da1771523124516" integrity="sha512-8DS7rgIrAmghBFwoOTujcf6D9rXvH8xm8JQ1Ja01h9QX8EzXldiszufYa4IFfKdLUKTTrnSFXLDkUEOTrZQ8Qg==" data-cf-beacon='{"version":"2024.11.0","token":"4c6229722a6346bc8eb5cb0e5eae5d41","server_timing":{"name":{"cfCacheStatus":true,"cfEdge":true,"cfExtPri":true,"cfL4":true,"cfOrigin":true,"cfSpeedBrain":true},"location_startswith":null}}' crossorigin="anonymous"></script>
+</body>
+</html>

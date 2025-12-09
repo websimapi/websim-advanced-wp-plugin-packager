@@ -1,0 +1,209 @@
+:root {
+    --bg-dark: #0f172a;
+    --bg-panel: #1e293b;
+    --border: #334155;
+    --text-main: #f1f5f9;
+    --text-muted: #94a3b8;
+    --primary: #3b82f6;
+    --primary-hover: #2563eb;
+    --accent: #0ea5e9;
+    --font-ui: 'Inter', sans-serif;
+    --font-code: 'JetBrains Mono', monospace;
+}
+
+* { box-sizing: border-box; }
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: var(--font-ui);
+    background-color: var(--bg-dark);
+    color: var(--text-main);
+    height: 100vh;
+    overflow: hidden;
+}
+
+.app-container {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+header {
+    height: 60px;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 20px;
+    background-color: var(--bg-panel);
+}
+
+.brand {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.brand h1 {
+    font-size: 18px;
+    font-weight: 600;
+    margin: 0;
+}
+
+.brand svg { color: var(--accent); }
+
+.primary-btn {
+    background-color: var(--primary);
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 6px;
+    font-weight: 500;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: background 0.2s;
+}
+
+.primary-btn:hover { background-color: var(--primary-hover); }
+
+main {
+    display: flex;
+    flex: 1;
+    overflow: hidden;
+}
+
+.sidebar {
+    width: 320px;
+    border-right: 1px solid var(--border);
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    overflow-y: auto;
+    background-color: #162032;
+}
+
+.panel h3 {
+    margin-top: 0;
+    margin-bottom: 15px;
+    font-size: 14px;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    letter-spacing: 0.05em;
+}
+
+.form-group { margin-bottom: 16px; }
+
+.form-group label {
+    display: block;
+    margin-bottom: 6px;
+    font-size: 13px;
+    font-weight: 500;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 8px 12px;
+    background: var(--bg-dark);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    color: var(--text-main);
+    font-family: var(--font-code);
+    font-size: 13px;
+}
+
+.form-group input:focus {
+    outline: none;
+    border-color: var(--primary);
+}
+
+.form-group small {
+    display: block;
+    margin-top: 4px;
+    color: var(--text-muted);
+    font-size: 11px;
+}
+
+.checkbox-group {
+    display: flex;
+    gap: 10px;
+    align-items: flex-start;
+}
+
+.checkbox-group input { margin-top: 4px; }
+
+.checkbox-group label strong {
+    display: block;
+    font-size: 13px;
+    margin-bottom: 4px;
+}
+
+.checkbox-group label span {
+    font-size: 12px;
+    color: var(--text-muted);
+    line-height: 1.4;
+    display: block;
+}
+
+.editor-container {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    background-color: #0d1117;
+}
+
+.editor-header {
+    height: 40px;
+    display: flex;
+    align-items: center;
+    padding: 0 20px;
+    border-bottom: 1px solid var(--border);
+    background-color: var(--bg-dark);
+    font-family: var(--font-code);
+    font-size: 13px;
+    color: var(--text-muted);
+    justify-content: space-between;
+}
+
+.badge {
+    background: var(--border);
+    padding: 2px 6px;
+    border-radius: 3px;
+    font-size: 11px;
+    color: var(--text-main);
+}
+
+textarea#codeEditor {
+    flex: 1;
+    background-color: transparent;
+    border: none;
+    color: #e6edf3;
+    font-family: var(--font-code);
+    font-size: 13px;
+    line-height: 1.6;
+    padding: 20px;
+    resize: none;
+    white-space: pre;
+    tab-size: 4;
+}
+
+textarea#codeEditor:focus { outline: none; }
+
+.status-panel {
+    margin-top: auto;
+    padding: 10px;
+    background: var(--bg-dark);
+    border-radius: 4px;
+    font-size: 12px;
+    color: var(--accent);
+    text-align: center;
+}
+
+@media (max-width: 768px) {
+    main { flex-direction: column; }
+    .sidebar { width: 100%; height: auto; max-height: 40%; }
+}
+
